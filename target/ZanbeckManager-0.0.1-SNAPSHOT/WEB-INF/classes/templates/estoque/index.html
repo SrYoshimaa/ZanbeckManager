@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:include="layout :: htmlhead"></head>
+	<body>
+		<div class="container">
+		<nav th:replace="layout :: menu">(menu)</nav>
+		
+		<a href="form.html" th:href="@{/estoque/novo}"
+			class="btn btn-primary btn-lg" role="button">Novo</a>
+		
+			<table class="table" id="estoque">
+				<thead class="thead-light"> 
+					<tr>
+						<th scope="col">Produto</th>			
+						<th scope="col">Quantidade</th>
+						<th scope="col">Valor</th>
+						<th scope="col">Validade</th>
+						<th scope="col"></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr scope="row" th:each="umitem : ${estoque}">
+						<td th:text="${umitem.produto.nome}"></td>
+						<td th:text="${umitem.produto.valor}"></td>
+						<td th:text="${umitem.quantidade}"></td>
+						<td th:text="${#dates.format(umitem.validade, 'dd/MM/yyyy')}"></td>
+						<td><a th:href= "@{'/estoque/edit/' + ${umitem.id}}" class="btn btn-warning">Alterar</a>
+						<button class='btn btn-danger btn-md js-delete'
+								th:data-customer-id="${umitem.id}">Excluir</button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div th:include="layout :: footer" id ="footer">(footer)</div>
+		<script type="text/javascript">
+			$(document).ready(function(){
+				$("#estoque").on("click", ".js-delete", function(){
+					var button = $(this);
+					bootbox.confirm("Você tem certeza que quer excluir item do estoque?", function(result){
+						if(result){
+							$.ajax({
+								url: "/estoque/delete/" + button.attr("data-customer-id"),
+								method: "GET",
+								success: function (){
+									window.location.href = "/estoque/"
+								}
+							});
+						}
+					});
+				});
+			});
+		</script>
+	</body>
+</html>

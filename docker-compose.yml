@@ -1,0 +1,25 @@
+version: '3.3'
+
+services:
+   dsi2019elivelton:
+     depends_on:
+       - dbzanbeckmanager  
+     image: zanbeckmanager:latest
+     ports:
+       - "8060:8080"
+     restart: always
+     environment:
+       - SPRING_PROFILES_ACTIVE=prod
+       - DSI2019_DB_HOST=jdbc:mysql://dbzanbeckmanager:3306/dbzanbeckmanager?useTimezone=true&serverTimezone=UTC
+       - DSI2019_DB_USERNAME=user
+       - DSI2019_DB_PASSWORD=mysql-0809@
+   dbzanbeckmanager:
+     image: mysql:5.7
+     restart: always
+#     ports:
+#       - "8090:3306"
+     environment:
+       MYSQL_ROOT_PASSWORD: Mysql-0809@
+       MYSQL_DATABASE: dbzanbeckmanager
+       MYSQL_USER: user
+       MYSQL_PASSWORD: mysql-0809@
