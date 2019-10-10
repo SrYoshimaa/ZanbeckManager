@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head th:include="layout :: htmlhead"></head>
+	<body>
+		<div class="container">
+			<nav th:replace="layout :: menu">(menu)</nav>
+ 			<div class="border border-dark">
+				<form th:action="@{/produto/(form)}" th:object="${produto}" action="#" method="post">
+					<input type="hidden" id="txtid" th:field="*{id}" />
+				    <div class="form-group">
+				        <label for="txtnome">Nome</label>
+				        <input type="text" th:field="*{nome}" class="form-control" 
+				        id="txtnome" placeholder="Digite o Nome do Produto">
+				        <p th:if ="${#fields.hasErrors('nome')}"
+				        th:errors="*{nome}" class="alert alert-danger"/>
+				    </div>
+				   	<div class="form-group">
+				        <label for="txtcat">Categoria</label>
+				        <input type="text" th:field="*{categoria}" class="form-control" 
+				        id="txtcat" placeholder="Digite a categoria do Produto">
+				    </div>
+				    <div class="form-group">
+                        <label for="txtlucro">Lucro</label>
+                        <input type="text" class="form-control" id="txtlucro" placeholder="Digite a % de Lucro" th:field="*{lucro}">
+                    </div>
+				    <div class="form-group">
+                        <label for="txtvalor">Valor de Custo</label>
+                        <input type="text" class="form-control" id="txtvalor" placeholder="Digite o Valor de Custo" th:field="*{valorcusto}">
+                    </div>
+				    <button type="submit" class="btn btn-primary">Enviar</button>
+				</form>
+			</div>
+		</div>
+		<div th:include="layout :: footer" id="footer">(footer)</div>
+	</body>
+</html>
