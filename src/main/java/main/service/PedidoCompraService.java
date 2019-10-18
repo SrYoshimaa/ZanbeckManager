@@ -8,7 +8,9 @@ import main.models.PedidoCompra;
 
 @Service
 public interface PedidoCompraService {
-    List<PedidoCompra> getAll();
-    void save(PedidoCompra pedidoCompra);
-    void delete(PedidoCompra pedidoCompra);
+	List<PedidoCompra> getAll();
+
+	void save(PedidoCompra pedidoCompra);
+
+	void delete(PedidoCompra pedidoCompra);
 }

@@ -20,6 +20,7 @@ public class ItemPedido {
 	private int quantidade;
 	private Date validade;
 	
+	
 	@ManyToOne(cascade= {CascadeType.MERGE,CascadeType.REFRESH})
 	private Produto produto;
 	

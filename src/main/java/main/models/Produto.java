@@ -20,7 +20,6 @@ public class Produto {
 	private String nome;
 	private String categoria;
 	private String valorcusto;
-	private String lucro;
 	private String valorvenda;
 	public long getId() {
 		return id;
@@ -45,12 +44,6 @@ public class Produto {
 	}
 	public void setValorcusto(String valorcusto) {
 		this.valorcusto = valorcusto;
-	}
-	public String getLucro() {
-		return lucro;
-	}
-	public void setLucro(String lucro) {
-		this.lucro = lucro;
 	}
 	public String getValorvenda() {
 		return valorvenda;

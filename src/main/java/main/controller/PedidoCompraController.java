@@ -19,32 +19,36 @@ import main.service.PedidoCompraService;
 @Controller
 @RequestMapping("/pedidocompra")
 public class PedidoCompraController {
-    @Autowired
-    private PedidoCompraService pedidoCompraService;
+	@Autowired
+	private PedidoCompraService pedidoCompraService;
 
-    @GetMapping
-    public ModelAndView index(){
-        List<PedidoCompra> lista = pedidoCompraService.getAll();
-        return new ModelAndView("pedidocompra/index", "pedidocompras", lista);
-    }
-    @GetMapping("/novo")
-    public ModelAndView createForm(@ModelAttribute PedidoCompra pedidoCompra){
-        pedidoCompraService.save(pedidoCompra);
-        return new ModelAndView("redirect:/pedidocompra");
-    }
-    @PostMapping(params="form")
-    public ModelAndView save(@Valid PedidoCompra pedidoCompra){
-        pedidoCompraService.save(pedidoCompra);
-        return new ModelAndView("redirect:/pedidocompra");
-    }
-    @GetMapping(value="/edit/{id}")
-    public ModelAndView edit(@PathVariable("id") PedidoCompra pedidoCompra){
-        return new ModelAndView("pedidocompra/form", "pedidocompra", pedidoCompra);
-    }
-    @GetMapping(value="delete/{id}")
-    public ModelAndView delete(@PathVariable("id") PedidoCompra pedidoCompra){
-        pedidoCompraService.delete(pedidoCompra);
-        return new ModelAndView("redirect:/pedidocompra");
-    }
+	@GetMapping
+	public ModelAndView index() {
+		List<PedidoCompra> lista = pedidoCompraService.getAll();
+		return new ModelAndView("pedidocompra/index", "pedidocompra", lista);
+	}
+
+	@GetMapping("/novo")
+	public ModelAndView createForm(@ModelAttribute PedidoCompra pedidoCompra) {
+		pedidoCompraService.save(pedidoCompra);
+		return new ModelAndView("redirect:/pedidocompra");
+	}
+
+	@PostMapping(params = "form")
+	public ModelAndView save(@Valid PedidoCompra pedidoCompra) {
+		pedidoCompraService.save(pedidoCompra);
+		return new ModelAndView("redirect:/pedidocompra");
+	}
+
+	@GetMapping(value = "/edit/{id}")
+	public ModelAndView edit(@PathVariable("id") PedidoCompra pedidoCompra) {
+		return new ModelAndView("pedidocompra/form", "pedidocompra", pedidoCompra);
+	}
+
+	@GetMapping(value = "delete/{id}")
+	public ModelAndView delete(@PathVariable("id") PedidoCompra pedidoCompra) {
+		pedidoCompraService.delete(pedidoCompra);
+		return new ModelAndView("redirect:/pedidocompra");
+	}
 
 }
