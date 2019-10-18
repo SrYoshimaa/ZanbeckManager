@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import main.models.Estoque;
+import main.models.Produto;
 import main.repository.EstoqueRepository;
 import main.service.EstoqueService;
 
@@ -26,6 +27,11 @@ public class EstoqueServiceImpl implements EstoqueService{
 	@Override
 	public void delete(Estoque estoque) {
 		repository.delete(estoque);
+	}
+	@Override
+	public int somaProduto(Produto produto) {
+		
+		return 0;
 	}
 	
 
