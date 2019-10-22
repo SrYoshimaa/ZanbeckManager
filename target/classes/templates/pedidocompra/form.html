@@ -5,7 +5,7 @@
 		<div class="container">
 			<nav th:replace="layout :: menu">(menu)</nav>
  			<div class="border border-dark">
-				<form th:action="@{/fornecedor/(form)}" th:object="${fornecedor}" action="#" method="post">
+				<form th:action="@{/fornecedor/(form)}" th:object="${pedido}" action="#" method="post">
 					<input type="hidden" id="txtid" th:field="*{id}" />
 					
 					<div class="form-group">
@@ -35,18 +35,5 @@
 			</div>
 		</div>
 		<div th:include="layout :: footer" id="footer">(footer)</div>
-		
-		<script type="text/javascript">
-            $(function () {
-                $("#txtCGC").mask("99.999.999/9999-99");
-            });
-        </script>
-        
-        <script type="text/javascript">
-            $(function () {
-                $("#txttelefone").mask("(99) 9999-9999");
-            });
-        </script>
-        
 	</body>
 </html>
