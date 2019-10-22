@@ -5,21 +5,20 @@
 		<div class="container">
 		<nav th:replace="layout :: menu">(menu)</nav>
 		
-		<a href="form.html" th:href="@{/fornecedor/novo}"
+		<a href="form.html" th:href="@{/pedidocompra/novo}"
 			class="btn btn-primary btn-lg" role="button">Novo</a>
 		
-			<table class="table" id="fornecedores">
+			<table class="table" id="pedidocompra">
 				<thead class="thead-light"> 
 					<tr>
-						<th scope="col">Nome</th>
-						<th scope="col">CNPJ</th>
-						<th scope="col">Telefone</th>
-						<th scope="col">Endereço</th>
-						<th scope="col"></th>
+						<th scope="col">Número</th>
+						<th scope="col">Data</th>
+						<th scope="col">Fornecedor</th>
+						<th scope="col">Valor</th>
 					</tr>
 				</thead>
 				<tbody>
-					<tr scope="row" th:each="umfornecedor : ${fornecedores}">
+					<tr scope="row" th:each="umpedidocompra : ${pedidocompra}">
 						<td th:text="${umfornecedor.nome}"></td>
 						<td th:text="${umfornecedor.CGC}"></td>
 						<td th:text="${umfornecedor.telefone}"></td>
