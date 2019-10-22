@@ -30,9 +30,7 @@ public class EstoqueServiceImpl implements EstoqueService{
 	}
 	@Override
 	public int somaProduto(Produto produto) {
+		return repository.somaProduto(produto);
 		
-		return 0;
 	}
-	
-
 }
