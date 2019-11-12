@@ -11,7 +11,6 @@
 			<table class="table" id="pedidocompra">
 				<thead class="thead-light"> 
 					<tr>
-						<th scope="col">Número</th>
 						<th scope="col">Data</th>
 						<th scope="col">Fornecedor</th>
 						<th scope="col">Valor</th>
@@ -19,11 +18,10 @@
 				</thead>
 				<tbody>
 					<tr scope="row" th:each="umpedidocompra : ${pedidocompra}">
-						<td th:text="${umfornecedor.nome}"></td>
-						<td th:text="${umfornecedor.CGC}"></td>
-						<td th:text="${umfornecedor.telefone}"></td>
-						<td th:text="${umfornecedor.localidade}"></td>
-						<td><a th:href= "@{'/fornecedor/edit/' + ${umfornecedor.id}}" class="btn btn-warning">Alterar</a>
+						<td th:text="${umpedidocompra.dataCompra}"></td>
+						<td th:text="${umpedidocompra.fornecedor.nome}"></td>
+						<td th:text="${umpedidocompra.valor}"></td>
+						<td><a th:href= "@{'/pedidocompra/edit/' + ${pedidocompra.id}}" class="btn btn-warning">Alterar</a>
 						<button class='btn btn-danger btn-md js-delete'
 								th:data-customer-id="${umfornecedor.id}">Excluir</button>
 						</td>
@@ -34,15 +32,15 @@
 		<div th:include="layout :: footer" id ="footer">(footer)</div>
 		<script type="text/javascript">
 			$(document).ready(function(){
-				$("#fornecedores").on("click", ".js-delete", function(){
+				$("#pedidocompra").on("click", ".js-delete", function(){
 					var button = $(this);
-					bootbox.confirm("Você tem certeza que quer excluir este Fornecedor?", function(result){
+					bootbox.confirm("Você tem certeza que quer excluir esse pedido?", function(result){
 						if(result){
 							$.ajax({
-								url: "/fornecedor/delete/" + button.attr("data-customer-id"),
+								url: "/pedidocompra/delete/" + button.attr("data-customer-id"),
 								method: "GET",
 								success: function (){
-									window.location.href = "/fornecedor/"
+									window.location.href = "/pedidocompra/"
 								}
 							});
 						}
