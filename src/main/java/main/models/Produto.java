@@ -1,5 +1,7 @@
 package main.models;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -19,6 +21,7 @@ public class Produto {
 	@Column(length=800)
 	private String nome;
 	private String categoria;
+	private Date validade;
 	private String valorcusto;
 	private String valorvenda;
 	public long getId() {
@@ -50,5 +53,11 @@ public class Produto {
 	}
 	public void setValorvenda(String valorvenda) {
 		this.valorvenda = valorvenda;
+	}
+	public Date getValidade() {
+		return validade;
+	}
+	public void setValidade(Date validade) {
+		this.validade = validade;
 	}
 }

@@ -1,33 +1,24 @@
 package main.models;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 
 @Entity
 public class Usuario {
-	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long id;
 	private String username;
 	private String password;
 	private String role;
-	
-	@OneToMany
-	private List<PedidoVenda> pedidovenda = new ArrayList<>();
-	
-	
-	public List<PedidoVenda> getPedidovenda() {
-		return pedidovenda;
+
+	public String getRole() {
+		return role;
 	}
-	public void setPedidovenda(List<PedidoVenda> pedidovenda) {
-		this.pedidovenda = pedidovenda;
+	public void setRole(String role) {
+		this.role = role;
 	}
 	public long getId() {
 		return id;
@@ -47,12 +38,4 @@ public class Usuario {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public String getRole() {
-		return role;
-	}
-	public void setRole(String role) {
-		this.role = role;
-	}
-	
-
 }

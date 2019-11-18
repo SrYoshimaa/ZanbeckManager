@@ -1,3 +1,4 @@
+package main;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;
@@ -20,6 +21,5 @@ public class StartupEventListenerBean {
 			user.setRole("ROLE_USER");
 			usuarioRepository.save(user);
 		}
-
 	}
 }

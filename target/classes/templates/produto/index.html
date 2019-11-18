@@ -13,7 +13,8 @@
 					<tr>
 						<th scope="col">Nome</th>
 						<th scope="col">Categoria</th>
-						<th scope="col">Lucro</th>
+						<th scope="col">Validade</th>
+						<th scope="col">Valor de Venda</th>
 						<th scope="col">Valor de Custo</th>				
 						<th scope="col"></th>
 					</tr>
@@ -22,7 +23,8 @@
 					<tr scope="row" th:each="umproduto : ${produtos}">
 						<td th:text="${umproduto.nome}"></td>
 						<td th:text="${umproduto.categoria}"></td>
-						<td th:text="${umproduto.lucro}"></td>
+						<td th:text="${umproduto.validade}"></td>
+						<td th:text="${umproduto.valorvenda}"></td>
 						<td th:text="${umproduto.valorcusto}"></td>
 						<td><a th:href= "@{'/produto/edit/' + ${umproduto.id}}" class="btn btn-warning">Alterar</a>
 						<button class='btn btn-danger btn-md js-delete'

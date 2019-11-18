@@ -6,7 +6,7 @@
 			<nav th:replace="layout :: menu">(menu)</nav>
  			<div class="border border-dark">
 				<form th:action="@{/estoque/(form)}" th:object="${estoque}" action="#" method="post">
-					<input type="hidden" id="txtid" th:field="*{id}" />	
+					<input type="hidden" id="txtid" th:field="*{id}"/>	
 					<div class="form-group">
                         <label for="slcProduto">Produto</label>
                         <select class="form-control" id="slcproduto" th:field="*{produto}">
@@ -17,23 +17,7 @@
 				        <label for="txtquantidade">Quantidade</label>
 				        <input type="text" th:field="*{quantidade}" class="form-control" 
 				        id="txtquantidade" placeholder="Quantidade">
-				    </div>
-				    <div class="form-group">
-                        <label for="slcProduto">Valor</label>
-                        <select class="form-control" id="slcproduto" th:field="*{produto}">
-                            <option th:each="umproduto : ${listaprodutos}" th:value="${umproduto.id}" th:text="${umproduto.valor}"></option>
-                        </select>
-                    </div>
-				    <div class="form-group">
-                        <label for="slcsexo">Validade</label>
-                        <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
-                            <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker1" 
-                                th:field="*{validade}"/>
-                            <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
-                                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                            </div>
-                        </div>
-                    </div>             
+				    </div> 
 				    <button type="submit" class="btn btn-primary">Enviar</button>
 				</form>
 			</div>
