@@ -11,19 +11,19 @@
 			<table class="table" id="pedidocompra">
 				<thead class="thead-light"> 
 					<tr>
-						<th scope="col">Data</th>
 						<th scope="col">Fornecedor</th>
+						<th scope="col">Data</th>
 						<th scope="col">Valor</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr scope="row" th:each="umpedidocompra : ${pedidocompra}">
-						<td th:text="${umpedidocompra.dataCompra}"></td>
-						<td th:text="${umpedidocompra.fornecedor.nome}"></td>
+						<td th:if="${umpedidocompra.fornecedor != null}" th:text="${umpedidocompra.fornecedor.nome}"></td>
+						<td th:text="${#dates.format(umpedidocompra.dataCompra, 'dd/MM/yyyy HH:mm')}"></td>
 						<td th:text="${umpedidocompra.valor}"></td>
-						<td><a th:href= "@{'/pedidocompra/edit/' + ${pedidocompra.id}}" class="btn btn-warning">Alterar</a>
+						<td><a th:href= "@{'/pedidocompra/edit/' + ${umpedidocompra.id}}" class="btn btn-warning">Alterar</a>
 						<button class='btn btn-danger btn-md js-delete'
-								th:data-customer-id="${umfornecedor.id}">Excluir</button>
+								th:data-customer-id="${umpedidocompra.id}">Excluir</button>
 						</td>
 					</tr>
 				</tbody>

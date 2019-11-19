@@ -4,12 +4,17 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 public class PedidoVenda {
@@ -17,15 +22,15 @@ public class PedidoVenda {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	private String descricao;
 	private double valor;
+	@Temporal(value=TemporalType.TIMESTAMP)
+    @DateTimeFormat(pattern = "dd/MM/yyyy H:mm")
 	private Date dataVenda;
-	private String tipo;
 	@OneToMany
 	private List<ItemPedido> item_pedido = new ArrayList<>();
-	@ManyToOne
+	@ManyToOne(cascade= {CascadeType.MERGE, CascadeType.REFRESH},optional=true)
 	private Cliente cliente;
-	@ManyToOne
+	@ManyToOne(cascade= {CascadeType.MERGE, CascadeType.REFRESH},optional=true)
 	private Estoque estoque;
 	
 	public Estoque getEstoque() {
@@ -60,14 +65,6 @@ public class PedidoVenda {
 		this.id = id;
 	}
 
-	public String getDescricao() {
-		return descricao;
-	}
-
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
-	}
-
 	public double getValor() {
 		return valor;
 	}
@@ -83,13 +80,4 @@ public class PedidoVenda {
 	public void setDataVenda(Date dataVenda) {
 		this.dataVenda = dataVenda;
 	}
-
-	public String getTipo() {
-		return tipo;
-	}
-
-	public void setTipo(String tipo) {
-		this.tipo = tipo;
-	}
-
 }

@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
@@ -18,6 +19,8 @@ public class Cliente {
 	private long id;
 	@NotNull
 	private String CGC;
+	@NotNull()
+	@NotEmpty()
 	@Column(length=800)
 	private String nome;
 	private String telefone;

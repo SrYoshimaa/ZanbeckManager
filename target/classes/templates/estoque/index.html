@@ -19,6 +19,7 @@
 				<tbody>
 					<tr scope="row" th:each="umitem : ${estoque}">
 						<td th:text="${umitem.produto.nome}"></td>
+						<td th:text="${umitem.quantidade}"></td>
 						<td><a th:href= "@{'/estoque/edit/' + ${umitem.id}}" class="btn btn-warning">Alterar</a>
 						<button class='btn btn-danger btn-md js-delete'
 						th:data-customer-id="${umitem.id}">Excluir</button>

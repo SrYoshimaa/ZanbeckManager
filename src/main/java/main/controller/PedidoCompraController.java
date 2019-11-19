@@ -1,5 +1,6 @@
 package main.controller;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -13,7 +14,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import main.models.Fornecedor;
 import main.models.PedidoCompra;
+import main.service.FornecedorService;
 import main.service.PedidoCompraService;
 
 @Controller
@@ -21,6 +24,8 @@ import main.service.PedidoCompraService;
 public class PedidoCompraController {
 	@Autowired
 	private PedidoCompraService pedidoCompraService;
+	@Autowired
+	private FornecedorService fornecedorService;
 
 	@GetMapping
 	public ModelAndView index() {
@@ -30,8 +35,11 @@ public class PedidoCompraController {
 
 	@GetMapping("/novo")
 	public ModelAndView createForm(@ModelAttribute PedidoCompra pedidoCompra) {
-		pedidoCompraService.save(pedidoCompra);
-		return new ModelAndView("redirect:/pedidocompra");
+		List<Fornecedor> listafornecedor = fornecedorService.getAll();
+		HashMap<String, Object> dados = new HashMap<>();
+		dados.put("pedidocompra", pedidoCompra);
+		dados.put("listafornecedor", listafornecedor);
+		return new ModelAndView("pedidocompra/form", dados);
 	}
 
 	@PostMapping(params = "form")
@@ -42,7 +50,11 @@ public class PedidoCompraController {
 
 	@GetMapping(value = "/edit/{id}")
 	public ModelAndView edit(@PathVariable("id") PedidoCompra pedidoCompra) {
-		return new ModelAndView("pedidocompra/form", "pedidocompra", pedidoCompra);
+		List<Fornecedor> listafornecedor = fornecedorService.getAll();
+		HashMap<String, Object> dados = new HashMap<>();
+		dados.put("pedidocompra", pedidoCompra);
+		dados.put("listafornecedor", listafornecedor);
+		return new ModelAndView("pedidocompra/form", dados);
 	}
 
 	@GetMapping(value = "delete/{id}")

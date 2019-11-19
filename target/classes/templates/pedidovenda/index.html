@@ -5,28 +5,25 @@
 		<div class="container">
 		<nav th:replace="layout :: menu">(menu)</nav>
 		
-		<a href="form.html" th:href="@{/fornecedor/novo}"
+		<a href="form.html" th:href="@{/pedidovenda/novo}"
 			class="btn btn-primary btn-lg" role="button">Novo</a>
 		
-			<table class="table" id="fornecedores">
+			<table class="table" id="pedidovenda">
 				<thead class="thead-light"> 
 					<tr>
-						<th scope="col">Nome</th>
-						<th scope="col">CNPJ</th>
-						<th scope="col">Telefone</th>
-						<th scope="col">Endereço</th>
-						<th scope="col"></th>
+						<th scope="col">Cliente</th>
+						<th scope="col">Data</th>
+						<th scope="col">Valor</th>
 					</tr>
 				</thead>
 				<tbody>
-					<tr scope="row" th:each="umfornecedor : ${fornecedores}">
-						<td th:text="${umfornecedor.nome}"></td>
-						<td th:text="${umfornecedor.CGC}"></td>
-						<td th:text="${umfornecedor.telefone}"></td>
-						<td th:text="${umfornecedor.localidade}"></td>
-						<td><a th:href= "@{'/fornecedor/edit/' + ${umfornecedor.id}}" class="btn btn-warning">Alterar</a>
+					<tr scope="row" th:each="umpedidovenda : ${pedidovenda}">
+						<td th:if="${umpedidovenda.cliente != null}" th:text="${umpedidovenda.cliente.nome}"></td>
+						<td th:text="${#dates.format(umpedidovenda.dataVenda, 'dd/MM/yyyy HH:mm')}"></td>
+						<td th:text="${umpedidovenda.valor}"></td>
+						<td><a th:href= "@{'/pedidovenda/edit/' + ${umpedidovenda.id}}" class="btn btn-warning">Alterar</a>
 						<button class='btn btn-danger btn-md js-delete'
-								th:data-customer-id="${umfornecedor.id}">Excluir</button>
+								th:data-customer-id="${umpedidovenda.id}">Excluir</button>
 						</td>
 					</tr>
 				</tbody>
@@ -35,15 +32,15 @@
 		<div th:include="layout :: footer" id ="footer">(footer)</div>
 		<script type="text/javascript">
 			$(document).ready(function(){
-				$("#fornecedores").on("click", ".js-delete", function(){
+				$("#pedidovenda").on("click", ".js-delete", function(){
 					var button = $(this);
-					bootbox.confirm("Você tem certeza que quer excluir este Fornecedor?", function(result){
+					bootbox.confirm("Você tem certeza que quer excluir esse pedido?", function(result){
 						if(result){
 							$.ajax({
-								url: "/fornecedor/delete/" + button.attr("data-customer-id"),
+								url: "/pedidovenda/delete/" + button.attr("data-customer-id"),
 								method: "GET",
 								success: function (){
-									window.location.href = "/fornecedor/"
+									window.location.href = "/pedidovenda/"
 								}
 							});
 						}

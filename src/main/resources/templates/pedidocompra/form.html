@@ -5,30 +5,30 @@
 		<div class="container">
 			<nav th:replace="layout :: menu">(menu)</nav>
  			<div class="border border-dark">
-				<form th:action="@{/fornecedor/(form)}" th:object="${pedido}" action="#" method="post">
+				<form th:action="@{/pedidocompra/(form)}" th:object="${pedidocompra}" action="#" method="post">
 					<input type="hidden" id="txtid" th:field="*{id}" />
-					
-					<div class="form-group">
-				        <label for="txtdescricao">Nome</label>
-				        <input type="text" th:field="*{nome}" class="form-control" 
-				        id="txtnome" placeholder="Digite a razão social">
-				    </div> 
-                    
-                    <div class="form-group">
-                        <label for="txtCGC">CNPJ</label>
-                        <input type="text" class="form-control" id="txtCGC" placeholder="Digite o CNPJ" th:field="*{CGC}">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="txttelefone">Telefone</label>
-                        <input type="text" class="form-control" id="txttelefone" placeholder="Digite o Telefone" th:field="*{telefone}">
-                    </div>
-                    
 				    <div class="form-group">
-				        <label for="txtlocalidade">Endereço</label>
-				        <input type="text" th:field="*{localidade}" class="form-control" 
-				        id="txtlocalidade" placeholder="Digite o endereço">
-				    </div> 
+                        <label for="slcFornecedor">Fornecedor</label>
+                        <select class="form-control" id="slcfornecedor" th:field="*{fornecedor}">
+                            <option th:each="umfornecedor : ${listafornecedor}" th:value="${umfornecedor.id}" th:text="${umfornecedor.nome}"></option>
+                        </select>
+                    </div>
+				    
+				    <div class="form-group">
+                        <label for="slcdata">Data</label>
+                        <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
+                            <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker1" 
+                                th:field="*{dataCompra}"/>
+                            <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
+                                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                            </div>
+                        </div>
+                    </div>             
+                    
+                    <div class="form-group">
+                        <label for="txtvalor">Valor</label>
+                        <input type="text" class="form-control" id="txtvalor" placeholder="Digite o Valor" th:field="*{valor}">
+                    </div>
 				    
 				    <button type="submit" class="btn btn-primary">Enviar</button>
 				</form>
@@ -36,4 +36,11 @@
 		</div>
 		<div th:include="layout :: footer" id="footer">(footer)</div>
 	</body>
+	 <script type="text/javascript">
+            $(function () {
+                $('#datetimepicker1').datetimepicker({
+                    format:"DD/MM/YYYY HH:mm"                  
+                });
+            });
+        </script>
 </html>
