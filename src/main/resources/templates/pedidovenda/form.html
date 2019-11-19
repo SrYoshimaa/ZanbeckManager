@@ -5,32 +5,36 @@
 		<div class="container">
 			<nav th:replace="layout :: menu">(menu)</nav>
  			<div class="border border-dark">
-				<form th:action="@{/pedidovenda/(form)}" th:object="${pedidovenda}" action="#" method="post">
-					<input type="hidden" id="txtid" th:field="*{id}" />
-				    <div class="form-group">
-                        <label for="slcCliente">Cliente</label>
-                        <select class="form-control" id="slccliente" th:field="*{cliente}">
-                            <option th:each="umcliente : ${listacliente}" th:value="${umcliente.id}" th:text="${umcliente.nome}"></option>
-                        </select>
-                    </div>
-				    
-				    <div class="form-group">
-                        <label for="slcdata">Data</label>
-                        <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
-                            <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker1" 
-                                th:field="*{dataVenda}"/>
-                            <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
-                                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                            </div>
-                        </div>
-                    </div>             
-                    
-                    <div class="form-group">
-                        <label for="txtvalor">Valor</label>
-                        <input type="text" class="form-control" id="txtvalor" placeholder="Digite o Valor" th:field="*{valor}">
-                    </div>
-				    
-				    <button type="submit" class="btn btn-primary">Enviar</button>
+ 			
+				<form th:action="@{/pedidovenda}" action="#" method="post">
+					<div th:object="${pedidovenda}">
+				
+						<input type="hidden" id="txtid" th:field="${pedidovenda.id}" />
+						
+					    <div class="form-group">
+	                        <label for="slcCliente">Cliente</label>
+	                        <select class="form-control" id="slccliente" th:field="*{cliente}">
+	                            <option th:each="umcliente : ${listacliente}" th:value="${umcliente.id}" th:text="${umcliente.nome}"></option>
+	                        </select>
+	                    </div>
+					    
+					    <div class="form-group">
+	                        <label for="slcdata">Data</label>
+	                        <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
+	                            <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker1" 
+	                                th:field="${pedidovenda.dataVenda}"/>
+	                            <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
+	                                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+	                            </div>
+	                        </div>
+	                    </div>             
+	                    
+	                    <div class="form-group">
+	                        <label for="txtvalor">Valor</label>
+	                        <input type="text" class="form-control" id="txtvalor" placeholder="Digite o Valor" th:field="${pedidovenda.valor}">
+	                    </div>
+				    </div>	
+				    <button type="submit" name="save" class="btn btn-primary">Enviar</button>
 				</form>
 			</div>
 		</div>

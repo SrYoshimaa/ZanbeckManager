@@ -14,16 +14,17 @@
 						<th scope="col">Cliente</th>
 						<th scope="col">Data</th>
 						<th scope="col">Valor</th>
+						<th scope="col"></th>
 					</tr>
 				</thead>
 				<tbody>
-					<tr scope="row" th:each="umpedidovenda : ${pedidovenda}">
-						<td th:if="${umpedidovenda.cliente != null}" th:text="${umpedidovenda.cliente.nome}"></td>
-						<td th:text="${#dates.format(umpedidovenda.dataVenda, 'dd/MM/yyyy HH:mm')}"></td>
-						<td th:text="${umpedidovenda.valor}"></td>
-						<td><a th:href= "@{'/pedidovenda/edit/' + ${umpedidovenda.id}}" class="btn btn-warning">Alterar</a>
+					<tr scope="row" th:each="umpedidovenda : ${listaPedidoVenda}">
+						<td th:text="${umpedidovenda.listaPedidoVenda.nome}"></td>
+						<td th:text="${#dates.format(umpedidovenda.listaPedidoVenda.dataVenda, 'dd/MM/yyyy HH:mm')}"></td>
+						<td th:text="${umpedidovenda.listaPedidoVenda.valor}"></td>
+						<td><a th:href= "@{'/pedidovenda/edit/' + ${umpedidovenda.listaPedidoVenda.id}}" class="btn btn-warning">Alterar</a>
 						<button class='btn btn-danger btn-md js-delete'
-								th:data-customer-id="${umpedidovenda.id}">Excluir</button>
+								th:data-customer-id="${umpedidovenda.listaPedidoVenda.id}">Excluir</button>
 						</td>
 					</tr>
 				</tbody>
