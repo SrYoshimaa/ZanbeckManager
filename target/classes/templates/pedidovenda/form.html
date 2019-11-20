@@ -14,7 +14,7 @@
 					    <div class="form-group">
 	                        <label for="slcCliente">Cliente</label>
 	                        <select class="form-control" id="slccliente" th:field="*{cliente}">
-	                            <option th:each="umcliente : ${listacliente}" th:value="${umcliente.id}" th:text="${umcliente.nome}"></option>
+	                            <option th:each="umcliente : ${listaCliente}" th:value="${umcliente.id}" th:text="${umcliente.nome}"></option>
 	                        </select>
 	                    </div>
 					    
@@ -33,8 +33,54 @@
 	                        <label for="txtvalor">Valor</label>
 	                        <input type="text" class="form-control" id="txtvalor" placeholder="Digite o Valor" th:field="${pedidovenda.valor}">
 	                    </div>
-				    </div>	
-				    <button type="submit" name="save" class="btn btn-primary">Enviar</button>
+				    </div>
+				    <div class="card">
+					    <div class="card-header">Produtos do Pedido</div>
+					    <div class="card-body">
+			            	<div class="container" th:object="${novopedidovenda}">
+							  <div class="row">
+							    <div class="col-sm">
+							      <select class="form-control" id="slcItemPedido" th:field="${novopedidovenda.itemPedido}">
+						            <option th:each="umPedido : ${listaItemPedido}" th:value="${umPedido.id}" th:text="${umPedido.descricao}"></option>
+						          </select>
+							    </div>
+							    <div class="col-sm">
+							      <label for="txtvalor">Valor</label>
+							    </div>
+							    <div class="col-sm">
+						          <input type="text" class="form-control" id="txtvalor" th:field="${novopedidovenda.valor}" placeholder="Valor">
+							    </div>
+							    <div class="col-sm">
+					            	<button type="submit" name="insertproc" class="btn btn-primary">Inserir item</button>
+					            </div>
+							  </div>
+							</div>
+							<br>				            
+						    <table class="table">
+								<thead class="thead-light"> 
+									<tr>
+										<th scope="col">Produto</th>
+										<th scope="col">Valor</th>
+										<th scope="col"></th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr scope="row" th:each="procreali, stat : ${pedidovenda.listaItemPedido}">
+										<input type="hidden" th:field="${pedidovenda.listaItemPedido[__${stat.index}__].itemPedido}"/>
+										<input type="hidden" th:field="${pedidovenda.listaItemPedido[__${stat.index}__].valor}"/>
+										<td th:text="${procreali.itemPedido.descricao}"></td>
+										<td th:text="${procreali.valor}"></td>
+										<td>
+											<button type="submit" name="removeproc" th:value="__${stat.index}__" class="btn btn-primary">Remover</button>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+					    </div>
+					</div>
+				    
+				    
+				    <button type="submit"class="btn btn-primary">Enviar</button>
 				</form>
 			</div>
 		</div>

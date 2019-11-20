@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
@@ -26,13 +27,24 @@ public class PedidoVenda {
 	@Temporal(value=TemporalType.TIMESTAMP)
     @DateTimeFormat(pattern = "dd/MM/yyyy H:mm")
 	private Date dataVenda;
-	@OneToMany
-	private List<ItemPedido> item_pedido = new ArrayList<>();
+	
+	@OneToMany(cascade=CascadeType.ALL,orphanRemoval=true)
+	@JoinColumn(name="pedidoVenda_id")
+	private List<PedidoVendaRealizado> listaItemPedido = new ArrayList<PedidoVendaRealizado>();
+	
 	@ManyToOne(cascade= {CascadeType.MERGE, CascadeType.REFRESH},optional=true)
 	private Cliente cliente;
 	@ManyToOne(cascade= {CascadeType.MERGE, CascadeType.REFRESH},optional=true)
 	private Estoque estoque;
-	
+
+	public List<PedidoVendaRealizado> getListaItemPedido() {
+		return listaItemPedido;
+	}
+
+	public void setListaItemPedido(List<PedidoVendaRealizado> listaItemPedido) {
+		this.listaItemPedido = listaItemPedido;
+	}
+
 	public Estoque getEstoque() {
 		return estoque;
 	}
@@ -47,14 +59,6 @@ public class PedidoVenda {
 
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
-	}
-
-	public List<ItemPedido> getItem_pedido() {
-		return item_pedido;
-	}
-
-	public void setItem_pedido(List<ItemPedido> item_pedido) {
-		this.item_pedido = item_pedido;
 	}
 
 	public long getId() {
