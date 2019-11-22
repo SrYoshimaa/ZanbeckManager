@@ -23,18 +23,18 @@ import main.service.ClienteService;
 public class ClienteController {
 	@Autowired
 	private ClienteService clienteService;
-	
+
 	@GetMapping()
 	public ModelAndView index() {
 		List<Cliente> lista = clienteService.getAll();
 		return new ModelAndView("cliente/index", "clientes", lista);
 	}
-	
+
 	@GetMapping("/novo")
 	public ModelAndView createForm(@ModelAttribute Cliente cliente) {
 		return new ModelAndView("cliente/form");
 	}
-	
+
 	@PostMapping(params="form")
 	public ModelAndView save(@Valid Cliente cliente) {
 		clienteService.save(cliente);

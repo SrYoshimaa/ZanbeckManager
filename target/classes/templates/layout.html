@@ -35,17 +35,16 @@
 					role="button" data-toggle="dropdown" aria-haspopup="true"
 					aria-expanded="false"> Pedidos </a>
 					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-						<a class="dropdown-item" href="/pedidovenda">Pedidos de Venda</a> <a
-							class="dropdown-item" href="/pedidocompra">Pedidos de
+						<a class="dropdown-item" href="/pedidovenda">Pedidos de Venda</a>
+						<a class="dropdown-item" href="/pedidocompra">Pedidos de
 							Compra</a>
-					</div>
-				</li>
+					</div></li>
 			</ul>
 		</div>
-		
+
 		<form th:action="@{/logout}" method="post">
-	    	<input type="submit" value="Sair" class="btn"/>
-	    </form>
+			<input type="submit" value="Sair" class="btn" />
+		</form>
 	</nav>
 
 	<div th:fragment="footer" id="footer">

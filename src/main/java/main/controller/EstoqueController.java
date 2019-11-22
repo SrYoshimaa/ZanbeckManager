@@ -23,37 +23,37 @@ import main.service.EstoqueService;
 @Controller
 @RequestMapping("/estoque")
 public class EstoqueController {
-	
+
 	@Autowired
 	private EstoqueService estoqueService;
-	
+
 	@Autowired
-    private ProdutoRepository produtoRepository;
-	
+	private ProdutoRepository produtoRepository;
+
 	@GetMapping("")
 	public ModelAndView index() {
 		List<Estoque> lista = estoqueService.getAll();
 		return new ModelAndView("estoque/index", "estoque", lista);
 	}
 	@GetMapping("/novo")
-    public ModelAndView createForm(@ModelAttribute Estoque estoque) {
-        List<Produto> listaProdutos = produtoRepository.findAll();
-        return new ModelAndView("estoque/form","listaprodutos",listaProdutos);
+	public ModelAndView createForm(@ModelAttribute Estoque estoque) {
+		List<Produto> listaProdutos = produtoRepository.findAll();
+		return new ModelAndView("estoque/form","listaprodutos",listaProdutos);
 	}
-	
+
 	@PostMapping(params="form")
 	public ModelAndView save(@Valid Estoque estoque) {
 		estoqueService.save(estoque);
 		return new ModelAndView("redirect:/estoque");
 	}
-	
+
 	@GetMapping(value="/edit/{id}")
-    public ModelAndView alterarForm(@PathVariable("id") Estoque estoque) {
-        List<Produto> listaProdutos = produtoRepository.findAll();
-        HashMap<String, Object> dados = new HashMap<String, Object>();
-        dados.put("estoque",estoque);
-        dados.put("listaprodutos",listaProdutos);
-        return new ModelAndView("estoque/form",dados);
+	public ModelAndView alterarForm(@PathVariable("id") Estoque estoque) {
+		List<Produto> listaProdutos = produtoRepository.findAll();
+		HashMap<String, Object> dados = new HashMap<String, Object>();
+		dados.put("estoque",estoque);
+		dados.put("listaprodutos",listaProdutos);
+		return new ModelAndView("estoque/form",dados);
 	}
 	@GetMapping(value="/delete/{id}")
 	public ModelAndView delete(@PathVariable("id") Estoque estoque) {
