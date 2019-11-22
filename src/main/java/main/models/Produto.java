@@ -24,6 +24,7 @@ public class Produto {
 	private Date validade;
 	private String valorcusto;
 	private String valorvenda;
+	
 	public long getId() {
 		return id;
 	}

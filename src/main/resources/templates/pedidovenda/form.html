@@ -31,24 +31,24 @@
 	                    
 	                    <div class="form-group">
 	                        <label for="txtvalor">Valor</label>
-	                        <input type="text" class="form-control" id="txtvalor" placeholder="Digite o Valor" th:field="${pedidovenda.valor}">
+	                        <input type="text" class="form-control"  placeholder="Digite o Valor" th:field="${pedidovenda.valorVenda}">
 	                    </div>
 				    </div>
 				    <div class="card">
 					    <div class="card-header">Produtos do Pedido</div>
 					    <div class="card-body">
-			            	<div class="container" th:object="${novopedidovenda}">
+			            	<div class="container" th:object="${novoitempedido}">
 							  <div class="row">
 							    <div class="col-sm">
-							      <select class="form-control" id="slcItemPedido" th:field="${novopedidovenda.itemPedido}">
-						            <option th:each="umPedido : ${listaItemPedido}" th:value="${umPedido.id}" th:text="${umPedido.descricao}"></option>
+							      <select class="form-control" id="slcProduto" th:field="${novoitempedido.produto}">
+						            <option th:each="umPedido : ${listaProduto}" th:value="${umPedido.id}" th:text="${umPedido.nome}"></option>
 						          </select>
 							    </div>
 							    <div class="col-sm">
 							      <label for="txtvalor">Valor</label>
 							    </div>
 							    <div class="col-sm">
-						          <input type="text" class="form-control" id="txtvalor" th:field="${novopedidovenda.valor}" placeholder="Valor">
+						          <input type="text" class="form-control"  th:field="${novoitempedido.valor}" placeholder="Valor">
 							    </div>
 							    <div class="col-sm">
 					            	<button type="submit" name="insertproc" class="btn btn-primary">Inserir item</button>
@@ -66,9 +66,9 @@
 								</thead>
 								<tbody>
 									<tr scope="row" th:each="procreali, stat : ${pedidovenda.listaItemPedido}">
-										<input type="hidden" th:field="${pedidovenda.listaItemPedido[__${stat.index}__].itemPedido}"/>
+										<input type="hidden" th:field="${pedidovenda.listaItemPedido[__${stat.index}__].Produto}"/>
 										<input type="hidden" th:field="${pedidovenda.listaItemPedido[__${stat.index}__].valor}"/>
-										<td th:text="${procreali.itemPedido.descricao}"></td>
+										<td th:text="${procreali.Produto.nome}"></td>
 										<td th:text="${procreali.valor}"></td>
 										<td>
 											<button type="submit" name="removeproc" th:value="__${stat.index}__" class="btn btn-primary">Remover</button>

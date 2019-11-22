@@ -1,7 +1,5 @@
 package main.models;
 
-import java.util.Date;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -21,7 +19,6 @@ public class Estoque {
 	private long quantidade;
 	@Temporal(value=TemporalType.TIMESTAMP)
     @DateTimeFormat(pattern = "dd/MM/yyyy")
-    private Date validade;
 	
 	@ManyToOne(cascade= {CascadeType.MERGE, CascadeType.REFRESH},optional=true)
 	private Produto produto;
@@ -43,11 +40,5 @@ public class Estoque {
 	}
 	public void setId(long id) {
 		this.id = id;
-	}
-	public Date getValidade() {
-		return validade;
-	}
-	public void setValidade(Date validade) {
-		this.validade = validade;
 	}
 }

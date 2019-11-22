@@ -13,16 +13,17 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import main.models.Cliente;
 import main.models.ItemPedido;
 import main.models.PedidoVenda;
-import main.models.PedidoVendaRealizado;
+import main.models.Produto;
 import main.service.ClienteService;
-import main.service.ItemPedidoService;
 import main.service.PedidoVendaService;
+import main.service.ProdutoService;
 
 @Controller
 @RequestMapping("/pedidovenda")
@@ -32,7 +33,7 @@ public class PedidoVendaController {
 	@Autowired
 	private ClienteService clienteService;
 	@Autowired
-	private ItemPedidoService itemPedidoService;
+	private ProdutoService produtoService;
 	
 	@GetMapping
 	public ModelAndView index() {
@@ -43,18 +44,18 @@ public class PedidoVendaController {
 	@GetMapping("/novo")
 	public ModelAndView createForm(@ModelAttribute PedidoVenda pedidovenda) {
 		List<Cliente> listaCliente = clienteService.getAll();
-		List<ItemPedido> listaItemPedido = itemPedidoService.getAll();
+		List<Produto> listaProduto = produtoService.getAll();
 		
 		HashMap<String, Object> dados = new HashMap<>();
 		dados.put("pedidovenda", pedidovenda);
 		dados.put("listaCliente", listaCliente);
-		dados.put("listaItemPedido", listaItemPedido);
-		dados.put("novopedidovenda", new PedidoVendaRealizado());
+		dados.put("listaProduto", listaProduto);
+		dados.put("novoitempedido", new ItemPedido());
 		return new ModelAndView("pedidovenda/form", dados);
 	}
 
 	@PostMapping(params = "form")
-	public ModelAndView save(@Valid PedidoVenda pedidovenda, @Valid PedidoVendaRealizado novopedidovenda, BindingResult result, RedirectAttributes redirect) {
+	public ModelAndView save(@Valid PedidoVenda pedidovenda, @Valid ItemPedido novoitempedido, BindingResult result, RedirectAttributes redirect) {
 		pedidoVendaService.save(pedidovenda);
 		return new ModelAndView("redirect:/pedidovenda");
 	}
@@ -62,13 +63,13 @@ public class PedidoVendaController {
 	@GetMapping(value = "/edit/{id}")
 	public ModelAndView edit(@PathVariable("id") PedidoVenda pedidovenda) {
 		List<Cliente> listaCliente = clienteService.getAll();
-		List<ItemPedido> listaItemPedido = itemPedidoService.getAll();
+		List<Produto> listaProduto = produtoService.getAll();
 		
 		HashMap<String, Object> dados = new HashMap<>();
-		dados.put("pedidoVenda", pedidovenda);
+		dados.put("pedidovenda", pedidovenda);
 		dados.put("listaCliente", listaCliente);
-		dados.put("listaItemPedido", listaItemPedido);
-		dados.put("novopedidovenda", new PedidoVendaRealizado());
+		dados.put("listaProduto", listaProduto);
+		dados.put("novoitempedido", new ItemPedido());
 		return new ModelAndView("pedidovenda/form", dados);
 	}
 
@@ -79,16 +80,33 @@ public class PedidoVendaController {
 	}
 	
 	@PostMapping(params= {"insertproc"})
-	public ModelAndView insertproc(PedidoVenda pedidovenda, PedidoVendaRealizado novopedidovenda, BindingResult result, RedirectAttributes redirect) {
+	public ModelAndView insertproc(PedidoVenda pedidovenda, ItemPedido novoitempedido, BindingResult result, RedirectAttributes redirect) {
 		List<Cliente> listaCliente = clienteService.getAll();
-		List<ItemPedido> listaItemPedido = itemPedidoService.getAll();
-	
+		List<Produto> listaProduto = produtoService.getAll();
+		
+		pedidovenda.getListaItemPedido().add(novoitempedido);
+		
 		HashMap<String, Object> dados = new HashMap<>();
-		dados.put("pedidoVenda", pedidovenda);
+		dados.put("pedidovenda", pedidovenda);
 		dados.put("listaCliente", listaCliente);
-		dados.put("listaItemPedido", listaItemPedido);
-		dados.put("novopedidovenda", new PedidoVendaRealizado());
+		dados.put("listaProduto", listaProduto);
+		dados.put("novoitempedido", new ItemPedido());
 		return new ModelAndView("pedidovenda/form", dados);
 	}
-
+	
+	@PostMapping(params= {"removeproc"})
+	public ModelAndView removeproc(@RequestParam(name = "removeproc") int index, PedidoVenda pedidovenda, ItemPedido novoitempedido, BindingResult result, RedirectAttributes redirect) {
+		List<Cliente> listaCliente = clienteService.getAll();
+		List<Produto> listaProduto = produtoService.getAll();
+		
+		pedidovenda.getListaItemPedido().remove(novoitempedido);
+		
+		HashMap<String, Object> dados = new HashMap<>();
+		dados.put("pedidovenda", pedidovenda);
+		dados.put("listaCliente", listaCliente);
+		dados.put("listaProduto", listaProduto);
+		dados.put("novoitempedido", new ItemPedido());
+		
+		return new ModelAndView("pedidovenda/form", dados);
+	}
 }

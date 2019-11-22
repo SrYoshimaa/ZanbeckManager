@@ -23,34 +23,25 @@ public class PedidoVenda {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	private double valor;
+	private double valorVenda;
 	@Temporal(value=TemporalType.TIMESTAMP)
     @DateTimeFormat(pattern = "dd/MM/yyyy H:mm")
 	private Date dataVenda;
 	
 	@OneToMany(cascade=CascadeType.ALL,orphanRemoval=true)
-	@JoinColumn(name="pedidoVenda_id")
-	private List<PedidoVendaRealizado> listaItemPedido = new ArrayList<PedidoVendaRealizado>();
+	@JoinColumn(name="itemPedido_id")
+	private List<ItemPedido> listaItemPedido = new ArrayList<ItemPedido>();
 	
 	@ManyToOne(cascade= {CascadeType.MERGE, CascadeType.REFRESH},optional=true)
 	private Cliente cliente;
-	@ManyToOne(cascade= {CascadeType.MERGE, CascadeType.REFRESH},optional=true)
-	private Estoque estoque;
 
-	public List<PedidoVendaRealizado> getListaItemPedido() {
+	
+	public List<ItemPedido> getListaItemPedido() {
 		return listaItemPedido;
 	}
 
-	public void setListaItemPedido(List<PedidoVendaRealizado> listaItemPedido) {
+	public void setListaItemPedido(List<ItemPedido> listaItemPedido) {
 		this.listaItemPedido = listaItemPedido;
-	}
-
-	public Estoque getEstoque() {
-		return estoque;
-	}
-
-	public void setEstoque(Estoque estoque) {
-		this.estoque = estoque;
 	}
 
 	public Cliente getCliente() {
@@ -69,19 +60,19 @@ public class PedidoVenda {
 		this.id = id;
 	}
 
-	public double getValor() {
-		return valor;
-	}
-
-	public void setValor(double valor) {
-		this.valor = valor;
-	}
-
 	public Date getDataVenda() {
 		return dataVenda;
 	}
 
 	public void setDataVenda(Date dataVenda) {
 		this.dataVenda = dataVenda;
+	}
+
+	public double getValorVenda() {
+		return valorVenda;
+	}
+
+	public void setValorVenda(double valorVenda) {
+		this.valorVenda = valorVenda;
 	}
 }
